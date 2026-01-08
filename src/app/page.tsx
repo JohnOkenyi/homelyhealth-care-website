@@ -1,7 +1,6 @@
 export default function Home() {
   return (
     <main className="min-h-screen">
-      {/* Hero Section */}
       <section className="relative bg-gradient-to-br from-purple-50 to-blue-50 py-20">
         <div className="container mx-auto px-6">
           <div className="max-w-4xl mx-auto text-center">
@@ -11,7 +10,7 @@ export default function Home() {
             <p className="text-xl text-gray-700 mb-8">
               Professional home care services across the UK, delivered with warmth and dedication
             </p>
-            <div className="flex gap-4 justify-center">
+            <div className="flex gap-4 justify-center flex-wrap">
               <a href="/contact" className="bg-purple-600 text-white px-8 py-3 rounded-lg hover:bg-purple-700 transition">
                 Get Started
               </a>
@@ -23,7 +22,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Services Grid */}
       <section className="py-16 bg-white">
         <div className="container mx-auto px-6">
           <h2 className="text-3xl font-bold text-center mb-12">Our Services</h2>
@@ -44,7 +42,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* CTA Section */}
       <section className="bg-purple-600 text-white py-16">
         <div className="container mx-auto px-6 text-center">
           <h2 className="text-3xl font-bold mb-4">Ready to Get Started?</h2>
