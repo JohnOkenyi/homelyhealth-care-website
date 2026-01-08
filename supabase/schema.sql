@@ -129,6 +129,29 @@ CREATE TABLE enquiries (
   notes TEXT
 );
 
+-- Clients
+CREATE TABLE clients (
+  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  first_name TEXT NOT NULL,
+  last_name TEXT NOT NULL,
+  date_of_birth DATE,
+  address TEXT NOT NULL,
+  postcode TEXT,
+  phone TEXT,
+  emergency_contact_name TEXT,
+  emergency_contact_phone TEXT,
+  medical_conditions TEXT,
+  care_requirements TEXT,
+  service_type TEXT,
+  funding_source TEXT,
+  status TEXT DEFAULT 'active' CHECK (status IN ('active', 'on_hold', 'inactive', 'archived')),
+  start_date DATE,
+  assigned_care_manager UUID REFERENCES users(id),
+  notes TEXT,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+  updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
 -- Messages
 CREATE TABLE messages (
   id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
@@ -146,12 +169,14 @@ CREATE INDEX idx_shifts_staff ON shifts(assigned_staff_id);
 CREATE INDEX idx_availability_staff ON availability(staff_id, date);
 CREATE INDEX idx_timesheets_staff ON timesheets(staff_id);
 CREATE INDEX idx_documents_staff ON documents(staff_id);
+CREATE INDEX idx_clients_care_manager ON clients(assigned_care_manager);
 
 -- Enable Row Level Security
 ALTER TABLE users ENABLE ROW LEVEL SECURITY;
 ALTER TABLE staff_profiles ENABLE ROW LEVEL SECURITY;
 ALTER TABLE shifts ENABLE ROW LEVEL SECURITY;
 ALTER TABLE timesheets ENABLE ROW LEVEL SECURITY;
+ALTER TABLE clients ENABLE ROW LEVEL SECURITY;
 
 -- RLS Policies (basic - expand as needed)
 CREATE POLICY "Users can view own profile" ON users FOR SELECT USING (auth.uid() = id);
