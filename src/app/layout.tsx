@@ -1,4 +1,5 @@
 import './globals.css'
+// Trigger rebuild for Tailwind CSS
 
 export const metadata = {
   title: 'Homely Health Care - Professional Home Care Services',
